@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<h1>{{title}}</h1>
+
+<form action="{% url 'add_page' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-error">{{ form.non_field_errors }}</div>
+    <p>Новая картина</p>
+
+{% for f in form %}
+<p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+<div class="form-error">{{ f.errors }}</div>
+{% endfor %}
+
+
+    <button type="submit">Добавить</button>
+</form>
+
+{% endblock %}
+{% comment %} {% extends 'main/base.html' %}
+
+{% block title %} Добавить {% endblock %}
+{% block content %}
+<h1>{{title}}</h1>
+
+<form action="{% url 'add_page' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-error">{{ form.non_field_errors }}</div>
+    <p>Новая картина</p>
+{% for f in form %}
+<div class="input-box">
+<p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}<br></p>
+<div class="form-error">{{ f.errors }}</div>
+{% endfor %}
+    <button type="submit">Добавить</button>
+</form><style>
+    p {
+        font-size: 15px;
+        color: #fff;
+        font-family: emoji;
+        text-align: center;
+    }
+</style>
+{% endblock %}  {% endcomment %}
